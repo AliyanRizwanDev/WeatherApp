@@ -148,7 +148,7 @@ export default function Weather(props) {
           <img src={image} alt="image" style={{ width: "200px", marginTop:"40px"}} />
 
         <h1 style={{fontSize: "120px"}} className={toggle== false?"fade":""} >
-        {toggle ? `${tempdatac}°C` : `${tempdataf}°F`}
+        {toggle ? `${Math.floor(tempdatac)}°C` : `${Math.floor(tempdataf)}°F`}
       </h1>
       </div>
       <div className="row text-center" style={{marginTop:"100px"}} >
