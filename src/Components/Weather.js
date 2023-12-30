@@ -175,9 +175,8 @@ export default function Weather(props) {
       <div className="col my-4">
       <h4 style={{fontWeight:"bold"}} >Rain Chances</h4>
       <h4 className="col">{rain>=100?rain * 100:rain * 100+5}%</h4>
-      </div>
-
-      </div>
+      </div>      </div>
+      
     </div>
   );
 }

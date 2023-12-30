@@ -44,7 +44,6 @@ function App() {
     <div className="App" style={Style}>
       <NavBar city = {search} citySearch = {setSearch} />
       <Weather city = {search} citySearch = {setSearch} time = {time} setTime = {setTime}/>
-      <h1 className='text-center' style={{marginTop:"200px"}}>Created By Mohammad Aliyan</h1>
     </div>
   );
 }
