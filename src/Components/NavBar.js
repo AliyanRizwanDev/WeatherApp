@@ -24,8 +24,8 @@ const NavBar = (props) => {
     <div>
       <nav className="navbar navbar-expand-lg " style={{backgroundColor:"navy"}}>
         <div className="container-fluid">
-          <a className="navbar-brand text-light"><h1>
-            Weather App</h1></a>
+          <a className="navbar-brand text-light"><h3>
+            Weather App</h3></a>
           <button className="navbar-toggler bg-light my-2 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>

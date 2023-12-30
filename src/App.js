@@ -15,6 +15,7 @@ function App() {
     setInterval(() => {
       setTime(new Date());
       let currentHour = time.getHours();
+      
       if(currentHour >= 17 || currentHour <= 5){
         setStyle({
           ...Style
@@ -43,6 +44,7 @@ function App() {
     <div className="App" style={Style}>
       <NavBar city = {search} citySearch = {setSearch} />
       <Weather city = {search} citySearch = {setSearch} time = {time} setTime = {setTime}/>
+      <h1 className='text-center' style={{marginTop:"200px"}}>Created By Mohammad Aliyan</h1>
     </div>
   );
 }

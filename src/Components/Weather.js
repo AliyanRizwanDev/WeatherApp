@@ -81,6 +81,7 @@ export default function Weather(props) {
       setImage(sunny);
     } else if (condition == "Partly cloudy") {
       let currentHour = props.time.getHours();
+
       if (currentHour >= 17 || currentHour <= 5) {
         setImage(partlyday);
       } else {
@@ -107,6 +108,9 @@ export default function Weather(props) {
       } else {
         setImage(night);
       }
+     
+    } else{
+      setImage(cloudy);
     }
   };
 
@@ -141,7 +145,7 @@ export default function Weather(props) {
 
 
       <div className="row justify-content-center text-center ">
-        <img src={image} alt="image" style={{ width: "200px", marginTop:"40px"}} />
+          <img src={image} alt="image" style={{ width: "200px", marginTop:"40px"}} />
 
         <h1 style={{fontSize: "120px"}} className={toggle== false?"fade":""} >
         {toggle ? `${tempdatac}°C` : `${tempdataf}°F`}

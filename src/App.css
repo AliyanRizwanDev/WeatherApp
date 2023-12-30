@@ -1,5 +1,5 @@
 .App {
-  height: 1300px;
+  height: 1100px;
 }
 html, body {
   margin: 0;
@@ -110,4 +110,3 @@ input:checked + .slider:before {
   animation-duration: 1s;
   animation-fill-mode:forwards;
 }
-
