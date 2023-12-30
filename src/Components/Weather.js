@@ -92,7 +92,7 @@ export default function Weather(props) {
       setImage(cloudy);
     } else if (condition == "Rain") {
       setImage(rain);
-    } else if (condition == "Drizzle") {
+    } else if (condition == "Drizzle" || condition == "Light drizzle") {
       setImage(drizzle);
     } else if (condition == "Snow") {
       setImage(snow);
@@ -122,7 +122,13 @@ export default function Weather(props) {
     <div className="weathercomp container mt-4">
       
       {loading ? (
-        <center><p><span style={{margin:"250px"}} class="loader"></span></p></center>
+        <div className="row">
+  <div className="col d-flex justify-content-center">
+    <p style={{ margin: "250px" , marginTop:"150px" }}>
+      <span className="loader"></span>
+    </p>
+  </div>
+</div>
       ) : (
         <div>
           <div className="row">
