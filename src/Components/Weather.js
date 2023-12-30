@@ -86,7 +86,7 @@ export default function Weather(props) {
       } else {
         setImage(partlynight);
       }
-    } else if (condition == "Cloudy") {
+    } else if (condition == "Cloudy" || condition == "Overcast") {
       setImage(cloudy);
     } else if (condition == "Rain") {
       setImage(rain);
