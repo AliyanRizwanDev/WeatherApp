@@ -42,6 +42,7 @@ function App() {
   return (
     
     <div className="App" style={Style}>
+      
       <NavBar city = {search} citySearch = {setSearch} />
       <Weather city = {search} citySearch = {setSearch} time = {time} setTime = {setTime}/>
     </div>

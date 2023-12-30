@@ -26,12 +26,13 @@ export default function Weather(props) {
   const [rain, setRain] = useState(0);
   const [image, setImage] = useState(0);
   const [refresh, setRefresh] = useState(0);
-  
-  
+  const [loading,setLoading] = useState(true);
+
   const API_KEY = "52725d338ad644fa804163640232712";
 
   useEffect(() => {
     const fetchData = () => {
+      setLoading(true);
       fetch(
         `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${props.city}`
       )
@@ -55,24 +56,24 @@ export default function Weather(props) {
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     };
-  
+
     fetchData();
     const fetchDataInterval = setInterval(fetchData, 3600000);
-  
+
     return () => {
       clearInterval(fetchDataInterval);
     };
-
   }, [props.city, API_KEY]);
-  
 
   const [toggle, setToggle] = useState(true);
 
   function changeCtoF() {
     setToggle(!toggle);
-    
   }
 
   const ShowImage = () => {
@@ -108,8 +109,7 @@ export default function Weather(props) {
       } else {
         setImage(night);
       }
-     
-    } else{
+    } else {
       setImage(cloudy);
     }
   };
@@ -118,65 +118,68 @@ export default function Weather(props) {
     ShowImage();
   }, [condition]);
 
-  function refresher(){
-    setRefresh(refresh==0?1:0);
-  }
-  
-  
-
   return (
-    <div className="weathercomp  container mt-4">
-      <div className="row">
-        <div className="col-6">
-          <h1>
-            {country}, {region}, {name} <br/>
-            {props.time.getDate()}-{props.time.getMonth()+1}-{props.time.getFullYear()} {/* {props.time.toLocaleTimeString()}   */}
-          </h1>
-        </div>
-        <div className="col-6 d-flex align-items-center justify-content-end">
-        
-          <label className="switch" style={{marginTop:"-50px"}}>
-            <input type="checkbox" onClick={changeCtoF} />
-            <span className="slider round"></span>
-          <p className="my-3">°C to °F</p>
-          </label>
-        </div>
-      </div>
-
-
-      <div className="row justify-content-center text-center ">
-          <img src={image} alt="image" style={{ width: "200px", marginTop:"40px"}} />
-
-        <h1 style={{fontSize: "120px"}} className={toggle== false?"fade":""} >
-        {toggle ? `${Math.floor(tempdatac)}°C` : `${Math.floor(tempdataf)}°F`}
-      </h1>
-      </div>
-      <div className="row text-center" style={{marginTop:"100px"}} >
-
-      <div className="col my-4">
-      <h4 style={{fontWeight:"bold"}}>Condition</h4>
-      <h4 >{condition}</h4>
-      </div>
-
-      <div className="col my-4">
-      <h4 style={{fontWeight:"bold"}}>Wind Speed</h4>
-      <h4 className="">{wind} KPH</h4>
-      </div>
-
-      <div className="col my-4">
-      <h4 style={{fontWeight:"bold"}} >Humidity</h4>
-      <h4 className="">{humid}%</h4>
-      </div>
+    <div className="weathercomp container mt-4">
       
-      <div className="col my-4">
-      <h4 style={{fontWeight:"bold"}} >Feels Like</h4>
-      <h4 className={toggle== false?"fade":""}>{toggle == true ? `${feelc}°C` : `${feelf}°F`}</h4>
-      </div>
-      <div className="col my-4">
-      <h4 style={{fontWeight:"bold"}} >Rain Chances</h4>
-      <h4 className="col">{rain>=100?rain * 100:rain * 100+5}%</h4>
-      </div>      </div>
-      
+      {loading ? (
+        <center><p><span style={{margin:"250px"}} class="loader"></span></p></center>
+      ) : (
+        <div>
+          <div className="row">
+            <div className="col-6">
+              <h1>
+                {country}, {region}, {name} <br />
+                {props.time.getDate()}-{props.time.getMonth() + 1}-
+                {props.time.getFullYear()}{" "}
+              </h1>
+            </div>
+            <div className="col-6 d-flex align-items-center justify-content-end">
+              <label className="switch" style={{ marginTop: "-50px" }}>
+                <input type="checkbox" onClick={changeCtoF} />
+                <span className="slider round"></span>
+                <p className="my-3">°C to °F</p>
+              </label>
+            </div>
+          </div>
+
+          <div className="row justify-content-center text-center">
+            <img
+              src={image}
+              alt="image"
+              style={{ width: "200px", marginTop: "40px" }}
+            />
+
+            <h1 style={{ fontSize: "120px" }} className={toggle === false ? "fade" : ""}>
+              {toggle ? `${Math.floor(tempdatac)}°C` : `${Math.floor(tempdataf)}°F`}
+            </h1>
+          </div>
+
+          <div className="row text-center" style={{ marginTop: "100px" }}>
+            <div className="col my-4">
+              <h4 style={{ fontWeight: "bold" }}>Condition</h4>
+              <h4>{condition}</h4>
+            </div>
+            <div className="col my-4">
+              <h4 style={{ fontWeight: "bold" }}>Wind Speed</h4>
+              <h4 className="">{wind} KPH</h4>
+            </div>
+            <div className="col my-4">
+              <h4 style={{ fontWeight: "bold" }}>Humidity</h4>
+              <h4 className="">{humid}%</h4>
+            </div>
+            <div className="col my-4">
+              <h4 style={{ fontWeight: "bold" }}>Feels Like</h4>
+              <h4 className={toggle === false ? "fade" : ""}>
+                {toggle === true ? `${feelc}°C` : `${feelf}°F`}
+              </h4>
+            </div>
+            <div className="col my-4">
+              <h4 style={{ fontWeight: "bold" }}>Rain Chances</h4>
+              <h4 className="col">{rain >= 100 ? rain * 100 : rain * 100 + 5}%</h4>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
